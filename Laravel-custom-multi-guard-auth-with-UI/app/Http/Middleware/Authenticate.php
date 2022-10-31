@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
-
+use Auth;
 class Authenticate extends Middleware
 {
     /**
@@ -17,14 +17,38 @@ class Authenticate extends Middleware
         if (! $request->expectsJson()) {
             if($request->routeIs('user.*'))
             {
-            return route('user.login');
+                if(Auth::guard('web')->check())
+                {
+                      
+                }
+                else
+                {
+                return route('user.login');
+                }
             }
             if($request->routeIs('admin.*'))
             {
-            return route('admin.login');
+                if(Auth::guard('admin')->check())
+                {
+                      
+                }
+                else
+                {
+                    return route('admin.login');
+                }
+            
             }
             if($request->routeIs('seller.*'))
-            return route('seller.login');
+                {
+                    if(Auth::guard('seller')->check())
+                        {
+                            
+                        }
+                        else
+                        {
+                            return route('seller.login');
+                        }
+                }
         }
     }
 }
