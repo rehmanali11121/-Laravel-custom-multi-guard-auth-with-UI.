@@ -17,36 +17,23 @@ class Authenticate extends Middleware
         if (! $request->expectsJson()) {
             if($request->routeIs('user.*'))
             {
-                if(Auth::guard('web')->check())
+                if(!Auth::guard('web')->check())
                 {
-                      
-                }
-                else
-                {
-                return route('user.login');
+                     return route('user.login'); 
                 }
             }
             if($request->routeIs('admin.*'))
             {
-                if(Auth::guard('admin')->check())
+                if(!Auth::guard('admin')->check())
                 {
-                      
+                    return route('admin.login');   
                 }
-                else
-                {
-                    return route('admin.login');
-                }
-            
             }
             if($request->routeIs('seller.*'))
                 {
-                    if(Auth::guard('seller')->check())
+                    if(!Auth::guard('seller')->check())
                         {
-                            
-                        }
-                        else
-                        {
-                            return route('seller.login');
+                           return route('seller.login'); 
                         }
                 }
         }
