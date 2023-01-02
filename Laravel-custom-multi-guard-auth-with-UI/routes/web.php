@@ -50,6 +50,10 @@ Route::prefix('admin')->name('admin.')->group(function(){
     });
     Route::middleware(['auth:admin'])->group(function(){
         Route::view('/home','dashboard.admin.home')->name('home');
+        //  <a class="btn btn-link" href="{{ route('admin.password.request') }}">{{ __('Forgot Your Password?') }}</a>
+        // route('admin.password.update')
+        // route('admin.password.email')
+    //   <form method="POST" action="{{ route('admin.password.confirm') }}">
         Route::Post('/logout',[AdminController::class,'logout'])->name('logout'); 
     });
 });
